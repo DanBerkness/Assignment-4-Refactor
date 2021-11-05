@@ -1,4 +1,4 @@
-package c.userloginapplication;
+package com.userloginapplication;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,23 +11,22 @@ public class FileInput {
 		User[] users = null;
 		BufferedReader fileReader = null;
 		int userCtr = 0;
-		
+		User user = new User();
+		String[] dataLine = new String[4];
 		
 		try {
 			fileReader = new BufferedReader(new FileReader(filepath));
 			String line;
 			users = new User[20];
 			while ((line = fileReader.readLine()) != null) {
-				String[] dataLine = new String[4];
+				dataLine = new String[4];
 				dataLine = line.split(", ");
-				User user = new User(dataLine);
+				user = new User(dataLine);
 				user.setUserName(dataLine[0]);
 				user.setPassword(dataLine[1]);
 				user.setName(dataLine[2]);
 				user.setRole(dataLine[3]);
 				users[userCtr] = user;
-				UserRoleAssignment userSort = new UserRoleAssignment();
-				userSort.sortUsers(user, dataLine, users, userCtr);
 				userCtr++;
 			}
 				

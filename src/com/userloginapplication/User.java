@@ -1,8 +1,12 @@
-package c.userloginapplication;
+package com.userloginapplication;
 
 import java.io.Serializable;
 
 public class User implements Serializable, Comparable<User>{
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", password=" + password + ", name=" + name + ", role=" + role + "]";
+	}
 	public static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;
@@ -51,9 +55,9 @@ public class User implements Serializable, Comparable<User>{
 	}
 	@Override
 	public int compareTo(User that) {
-		if (this.name.compareTo(that.name)==0) {
+		if (this.userName.compareTo(that.userName)<0) {
 			return -1;
-		}else if (this.name.equals(that.name)){
+		}else if (this.userName.equals(that.userName)){
 			return 0;
 		}else {
 			return 1;

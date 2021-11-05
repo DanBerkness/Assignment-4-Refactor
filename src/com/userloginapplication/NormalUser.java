@@ -1,4 +1,4 @@
-package c.userloginapplication;
+package com.userloginapplication;
 
 public class NormalUser extends User{
 	public NormalUser(String userName, String password, String name) {

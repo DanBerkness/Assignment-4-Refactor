@@ -1,4 +1,4 @@
-package c.userloginapplication;
+package com.userloginapplication;
 
 import java.util.Arrays;
 
@@ -7,12 +7,11 @@ public class UserRoleAssignment {
 
 		if (user.getRole().equals("super_user")) {
 			users[userCtr++] = new SuperUser(dataLine[0], dataLine[1], dataLine[2]);
-//			Arrays.sort(users);
-
+			Arrays.sort(users);
 			Boolean isSuperUser = true;
 		} else {
 			users[userCtr++] = new NormalUser(dataLine[0], dataLine[1], dataLine[2]);
-//			Arrays.sort(users);
+			Arrays.sort(users);
 			Boolean isSuperUser = false;
 		}
 

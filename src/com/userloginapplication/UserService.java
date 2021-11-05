@@ -1,8 +1,11 @@
-package c.userloginapplication;
+package com.userloginapplication;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+
 
 public class UserService {
 	Scanner scanner = new Scanner(System.in);
@@ -74,7 +77,7 @@ public class UserService {
 				if (user.getRole().equals("super_user")) {
 					System.out.println("Welcome super user " + user.getName());
 					isSuperUser = true;
-					showUserOptions(user, isSuperUser, loggedInUser);
+					showUserOptions(user,  isSuperUser, loggedInUser);
 				} else if (user.getRole().equals("normal_user")) {
 					System.out.println("Welcome normal user " + user.getName());
 					showUserOptions(user, isSuperUser, loggedInUser);
@@ -97,6 +100,7 @@ public class UserService {
 					break;
 				case 1:
 					updateUsername(user);
+					
 					break;
 				case 2:
 					updatePassword(user);
@@ -138,7 +142,7 @@ public class UserService {
 		user.setName(changeName);
 		try {
 			Arrays.sort(users);
-			FileOutputClass.writeFile(users);	
+			FileOutput.writeFile(users);	
 		}catch (IOException e) {
 			System.out.println("SuperUser case 3 error.");
 			e.printStackTrace();
@@ -150,7 +154,7 @@ public class UserService {
 		user.setPassword(changePassword);
 		try {
 			Arrays.sort(users);
-			FileOutputClass.writeFile(users);
+			FileOutput.writeFile(users);
 		} catch (IOException e) {
 			System.out.println("SuperUser case 2 error.");
 			e.printStackTrace();
@@ -161,8 +165,19 @@ public class UserService {
 		String changeUsername = userQuestion(English.UPDATE_USER_NAME);
 		user.setUserName(changeUsername);
 		try {
-			Arrays.sort(users);
-			FileOutputClass.writeFile(users);
+			if (user.getRole().equals("super_user")) {
+				User superUser = new SuperUser(user.getUserName(), user.getPassword(), user.getName());
+				ArrayList<SuperUser> superUserArray = new ArrayList<>();
+				superUserArray.addAll(superUserArray);
+				
+				Arrays.sort(users);
+				Boolean isSuperUser = true;
+			} else if (user.getRole().equals("normal_user")) {
+				Arrays.sort(users);
+				Boolean isSuperUser = false;
+			}
+
+			FileOutput.writeFile(users);
 		} catch (IOException e) {
 			System.out.println("SuperUser case 1 error.");
 			e.printStackTrace();
