@@ -55,13 +55,20 @@ public class User implements Serializable, Comparable<User>{
 	}
 	@Override
 	public int compareTo(User that) {
-		if (this.userName.compareTo(that.userName)<0) {
+		if (that.role.compareTo(this.role)<0) {
 			return -1;
-		}else if (this.userName.equals(that.userName)){
-			return 0;
+		}else if (that.role.equals(this.role)){
+			if (this.userName.compareTo(that.userName)<0) {
+				return -1;
+			}else if (this.userName.equals(that.userName)){
+				return 0;
+			}else {
+				return 1;
+			}
 		}else {
 			return 1;
 		}
 	}
+	
 
 }
