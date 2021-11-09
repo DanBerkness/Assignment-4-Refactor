@@ -4,21 +4,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 
 
 public class UserService {
 	Scanner scanner = new Scanner(System.in);
+	
 	private User[] users = new User[4];
+	
+	public String userGuiSelector(String gui) {
+		System.out.println(gui);
+		return scanner.nextLine();
+	}
 
 	public String userQuestion(String question) {
 		System.out.println(question);
-		return scanner.next();
-	}
-
-	public int userGuiSelector(String gui) {
-		System.out.println(gui);
-		return scanner.nextInt();
+		return scanner.nextLine();
+	
 	}
 
 	public User[] getUsers() {
@@ -33,7 +36,6 @@ public class UserService {
 		for (User user : users) {
 			user.getUserName();
 			if (inputUserName.equalsIgnoreCase(user.getUserName()) && inputPassword.equals(user.getPassword())) {
-
 				return user;
 			}
 		}
@@ -93,8 +95,8 @@ public class UserService {
 	public void showUserOptions(User user, Boolean isSuperUser, boolean loggedInUser) {
 		while (loggedInUser) {
 			if (isSuperUser) {
-				int superUserSelector = userGuiSelector(English.SUPER_USER_GUI);
-				switch (superUserSelector) {
+				String superUserSelector = userGuiSelector(English.SUPER_USER_GUI);
+				switch (Integer.parseInt(superUserSelector)) {
 				case 0:
 					changeUser(isSuperUser, loggedInUser);
 					break;
@@ -116,8 +118,8 @@ public class UserService {
 					return;
 				}
 			} else if (isSuperUser == false) {
-				int normalUserSelector = userGuiSelector(English.NORMAL_USER_GUI);
-				switch (normalUserSelector) {
+				String normalUserSelector = userGuiSelector(English.NORMAL_USER_GUI);
+				switch (Integer.parseInt(normalUserSelector)) {
 				case 1:
 					updateUsername(user);
 					break;
@@ -163,6 +165,7 @@ public class UserService {
 
 	private void updateUsername(User user) {
 		String changeUsername = userQuestion(English.UPDATE_USER_NAME);
+		System.out.println("");
 		user.setUserName(changeUsername);
 		try {
 			if (user.getRole().equals("super_user")) {
