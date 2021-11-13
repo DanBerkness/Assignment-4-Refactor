@@ -166,7 +166,8 @@ public class UserService {
 	private void updateUsername(User user) {
 		String changeUsername = userQuestion(English.UPDATE_USER_NAME);
 		System.out.println("");
-		user.setUserName(changeUsername);
+		String toLower = changeUsername.toLowerCase();
+		user.setUserName(toLower);
 		try {
 			if (user.getRole().equals("super_user")) {
 				User superUser = new SuperUser(user.getUserName(), user.getPassword(), user.getName());
